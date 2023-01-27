@@ -48,17 +48,37 @@ const myUsers = {
 }
 
 const myAsyncFunc = async () => {
-    const response = await fetch("https://jsonplaceholder.typicode.com")
+    const response = await fetch("https://jsonplaceholder.typicode.com/users")
     const jsonUserData = await response.json()
-
-    return jsonUserData
+    const userEmailArray = jsonUserData.map(user => {
+        return user.email
+    })
 }
 
 const anotherAsyncFunc = async () => {
     const data = await myAsyncFunc()
     myUsers.userList = data
-    console.log(myUsers.userList)
 }
 
 anotherAsyncFunc()
-console.log(myUsers.userList)
+
+const getData = async () => {
+    const response = await fetch("https://icanhazdadjoke.com/", {
+        method: "GET",
+        headers: {
+            Accept: "application/json"
+        }
+    })
+
+    // const response = await fetch(URL, {
+    //     method: "POST",
+    //     headers: {
+    //         "Content-Type": "application/json"
+    //     },
+    //     body: {}
+    // })
+    const data = await response.json()
+    console.log(data)
+}
+
+getData()
